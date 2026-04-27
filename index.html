@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AidSync | Smart Community Resource Allocation</title>
+    <meta name="description" content="Centralizing community needs and matching them with volunteers in real-time.">
+    <link rel="manifest" href="./assets/manifest-D4472aLW.json">
+  <script type="module" crossorigin src="./assets/index-XF7D5T_2.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BT6at1sB.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <i data-lucide="shield-check" class="primary-text"></i>
+                <span>Aid<span class="gradient-text">Sync</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#needs">Local Needs</a></li>
+                <li><a href="#volunteer">Volunteer</a></li>
+                <li><a href="#report">Report Need</a></li>
+            </ul>
+            <button class="btn btn-outline" id="loginBtn">
+                <i data-lucide="user"></i>
+                Sign In
+            </button>
+        </nav>
+
+        <section class="hero">
+            <h1 class="gradient-text">Unite Your Community. <br>Sync Every Need.</h1>
+            <p>A data-driven platform that gathers scattered community information to prioritize urgent needs and match them with the right volunteers instantly.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button class="btn btn-primary" id="volunteerBtn">
+                    <i data-lucide="heart"></i>
+                    Start Volunteering
+                </button>
+                <button class="btn btn-outline" id="reportBtn">
+                    <i data-lucide="plus-circle"></i>
+                    Report a Need
+                </button>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="glass-card stat-card">
+                <span class="stat-value" id="totalNeeds">128</span>
+                <span class="stat-label">Urgent Needs Found</span>
+            </div>
+            <div class="glass-card stat-card">
+                <span class="stat-value" id="activeVolunteers">452</span>
+                <span class="stat-label">Active Volunteers</span>
+            </div>
+            <div class="glass-card stat-card">
+                <span class="stat-value" id="matchesMade">89%</span>
+                <span class="stat-label">Match Success Rate</span>
+            </div>
+        </section>
+
+        <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr;">
+            <!-- Main Feed -->
+            <section class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3>Live Community Feed</h3>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-outline" style="padding: 0.5rem;" id="filterBtn">
+                            <i data-lucide="filter"></i>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+                <div id="needsList" class="needs-feed">
+                    <!-- Dynamic Needs Will Be Injected Here -->
+                </div>
+            </section>
+
+            <!-- Sidebar / Stats -->
+            <aside class="glass-card">
+                <h3>Community Pulse</h3>
+                <div class="map-container" id="communityMap">
+                    <!-- SVG Map Mockup -->
+                    <svg viewBox="0 0 200 200" style="width: 100%; height: auto;">
+                        <circle cx="50" cy="50" r="5" fill="var(--danger)" class="pulse"></circle>
+                        <circle cx="150" cy="120" r="5" fill="var(--primary)" class="pulse"></circle>
+                        <circle cx="80" cy="160" r="5" fill="var(--secondary)" class="pulse"></circle>
+                        <path d="M20,20 Q100,50 180,20" stroke="rgba(255,255,255,0.1)" fill="none" />
+                        <path d="M50,180 Q100,150 150,180" stroke="rgba(255,255,255,0.1)" fill="none" />
+                    </svg>
+                    <div class="map-label">Real-time Need Density</div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Medical Supplies</span>
+                            <span>85%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 85%; height: 100%; background: var(--danger);"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Elderly Support</span>
+                            <span>62%</span>
+                        </div>
+                        <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 62%; height: 100%; background: var(--accent);"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
+                <h4>Recent Success</h4>
+                <div id="successFeed" style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">
+                    <p>Volunteer <strong>Sarah J.</strong> just completed "Logistics Support" in North Park.</p>
+                </div>
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
+                <h4>Impact Growth</h4>
+                <div class="impact-chart" id="impactChart">
+                    <!-- Bars will be injected here -->
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Report Need Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content glass-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3>Report a New Need</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label>Need Title</label>
+                    <input type="text" id="title" placeholder="e.g. Food Shortage at Center" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Food</option>
+                            <option>Medical</option>
+                            <option>Shelter</option>
+                            <option>Transport</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Urgency</label>
+                        <select id="urgency">
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                            <option>Critical</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="e.g. Downtown" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="description" rows="3" placeholder="Describe the situation..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
